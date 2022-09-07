@@ -1,5 +1,6 @@
 package Utility;
 
+import java.util.Scanner;
 public class Investment {
 
     public static double investment(double c, double r, int t, int n) {
