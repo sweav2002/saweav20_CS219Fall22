@@ -1,4 +1,4 @@
-package Utility;
+package HW4;
 
 import java.util.Scanner;
 public class Investment {
