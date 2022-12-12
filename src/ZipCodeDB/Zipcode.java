@@ -79,17 +79,20 @@ public class Zipcode implements Comparable<Zipcode>, Distance, WeatherInfo {
                 humidity = Double.parseDouble(line.substring(line.indexOf(':')+1,
                         line.indexOf(',')));
             }
-            if (line.indexOf("speed") >0 ) {
-                speed = Double.parseDouble(line.substring(line.indexOf(':')+1,
-                        line.indexOf(',')));
+            if (line.indexOf("speed") > 0 ) {
+                int start = line.indexOf(':') + 3;
+                int end = line.indexOf(',') - 1;
+                speed = Double.parseDouble(line.substring(start,end));
             }
             if (line.indexOf("temp") >0 ) {
-                temp = Double.parseDouble(line.substring(line.indexOf(':')+1,
-                        line.indexOf(',')));
+                int start = line.indexOf(':') + 3;
+                int end = line.indexOf(',') + 1;
+                temp = Double.parseDouble(line.substring(start,end));
             }
             if (line.indexOf("cloud") >0 ) {
-                clouds = line.substring(line.indexOf(':')+1,
-                        line.indexOf(','));
+                int start = line.indexOf(':') + 3;
+                int end = line.indexOf(',') + 1;
+                clouds = line.substring(start,end);
             }
         }
 

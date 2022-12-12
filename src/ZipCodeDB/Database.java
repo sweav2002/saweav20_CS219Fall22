@@ -106,7 +106,10 @@ public class Database {
             return null;
     }
 
-
+    // return the zipcode info of the northern most latitude
+    public Zipcode max_latitude(){
+        return null;
+    }
 
 
 }
