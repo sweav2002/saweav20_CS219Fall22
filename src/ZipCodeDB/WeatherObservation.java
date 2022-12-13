@@ -14,6 +14,8 @@ public class WeatherObservation {
         this.clouds = clouds;
     }
 
+
+
     @Override
     public String toString() {
         return "WeatherObservation{" +

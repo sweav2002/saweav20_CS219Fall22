@@ -10,6 +10,8 @@ public class GUIPanel extends JPanel {
     private JButton submit;
     private JTextArea output;
 
+    private JButton north;
+
     private Database db;  // the zipcode database
 
     public GUIPanel() {
@@ -22,6 +24,10 @@ public class GUIPanel extends JPanel {
 
         this.output = new JTextArea(5, 20);
         this.add(this.output);
+
+        this.north = new JButton("Northernmost");
+        this.add(this.north);
+        this.north.addActionListener(new NorthButtonListener());
 
         this.db = new Database(); // load the zipcodes
     }
@@ -38,6 +44,19 @@ public class GUIPanel extends JPanel {
             Zipcode zc = db.search(code);
             WeatherObservation wob = zc.getWeatherData();
             output.setText(wob.toString());
+        }
+    }
+
+    class NorthButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String code = zipcode.getText();
+            double lat = Double.parseDouble(zipcode.getText());
+
+            Zipcode zc = db.getNorthern(lat);
+            output.setText(zc.toString());
+
         }
     }
 

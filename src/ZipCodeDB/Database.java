@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Database {
+public class Database implements LatLngInterface {
 
     private ArrayList<Zipcode> codes;
 
@@ -39,17 +39,15 @@ public class Database {
         // read zipcode file line by line
         while (s.hasNextLine()) {
             String line = s.nextLine();
-            String [] parts = line.split(",");
-            Zipcode z = new Zipcode(parts[1].substring(1,parts[1].length() - 1),
-                    parts[2].substring(1,parts[2].length() - 1),
-                    parts[3].substring(1,parts[3].length() - 1),
+            String[] parts = line.split(",");
+            Zipcode z = new Zipcode(parts[1].substring(1, parts[1].length() - 1),
+                    parts[2].substring(1, parts[2].length() - 1),
+                    parts[3].substring(1, parts[3].length() - 1),
                     Double.parseDouble(parts[4]),
                     Double.parseDouble(parts[5]),
                     Integer.parseInt(parts[6])
-                    );
+            );
             codes.add(z);  // put z at the end of the array list
-
-
 
 
         }
@@ -63,8 +61,8 @@ public class Database {
     // write a function to search for zipcode data by a zipcode
     // return the reference to the object if found, null if not found
     public Zipcode findByZip(String code) {
-        for(int i = 0; i < this.codes.size(); i++) {
-            if(code.equals(this.codes.get(i).getCode()))
+        for (int i = 0; i < this.codes.size(); i++) {
+            if (code.equals(this.codes.get(i).getCode()))
                 return this.codes.get(i);
         }
         return null;
@@ -100,16 +98,21 @@ public class Database {
         int pos = Collections.binarySearch(this.codes,
                 new Zipcode(code, "", "", 0, 0, 0));
 
-        if(pos != -1)
+        if (pos != -1)
             return this.codes.get(pos);
         else
             return null;
     }
 
     // return the zipcode info of the northern most latitude
-    public Zipcode max_latitude(){
+    public Zipcode getNorthern(double lat) {
+        double curr_max = Double.MIN_VALUE;
+        for (Zipcode code : this.codes)
+            if (curr_max < lat)
+                return code;
+            else
+                return null;
         return null;
     }
-
-
 }
+

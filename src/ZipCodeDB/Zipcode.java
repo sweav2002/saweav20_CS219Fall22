@@ -75,25 +75,27 @@ public class Zipcode implements Comparable<Zipcode>, Distance, WeatherInfo {
 
         while (s.hasNextLine()) {
             String line = s.nextLine();
-            if (line.indexOf("humidity") >0 ) {
+            if (line.indexOf("humidity") > 0 ) {
                 humidity = Double.parseDouble(line.substring(line.indexOf(':')+1,
                         line.indexOf(',')));
             }
-            if (line.indexOf("speed") > 0 ) {
+            if (line.indexOf("Speed") > 0 ) {
                 int start = line.indexOf(':') + 3;
                 int end = line.indexOf(',') - 1;
                 speed = Double.parseDouble(line.substring(start,end));
             }
-            if (line.indexOf("temp") >0 ) {
+            if (line.indexOf("temperature") > 0 ) {
                 int start = line.indexOf(':') + 3;
                 int end = line.indexOf(',') + 1;
                 temp = Double.parseDouble(line.substring(start,end));
             }
-            if (line.indexOf("cloud") >0 ) {
+            if (line.indexOf("clouds") > 0 ) {
                 int start = line.indexOf(':') + 3;
                 int end = line.indexOf(',') + 1;
                 clouds = line.substring(start,end);
             }
+            else
+                return null;
         }
 
         WeatherObservation ob = new WeatherObservation(humidity, speed, temp, clouds);
